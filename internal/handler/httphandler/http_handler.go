@@ -47,7 +47,15 @@ func NewHandler(conf HandlerConfig) (*Handler, error) {
 		config: conf,
 	}, nil
 }
-
+func (h *Handler) sendAsync(url string, payload interface{}) {
+	go func() {
+		if err := h.send(url, payload); err != nil {
+			log.WithError(err).WithFields(log.Fields{
+				"url": url,
+			}).Error("handler/http error")
+		}
+	}()
+}
 func (h *Handler) send(url string, payload interface{}) error {
 	b, err := json.Marshal(payload)
 	if err != nil {
@@ -93,7 +101,8 @@ func (h *Handler) SendDataUp(pl handler.DataUpPayload) error {
 		"url":     h.config.DataUpURL,
 		"dev_eui": pl.DevEUI,
 	}).Info("handler/http: publishing data-up payload")
-	return h.send(h.config.DataUpURL, pl)
+	h.sendAsync(h.config.DataUpURL, pl)
+	return nil
 }
 
 // SendJoinNotification sends a join notification.
@@ -106,7 +115,8 @@ func (h *Handler) SendJoinNotification(pl handler.JoinNotification) error {
 		"url":     h.config.JoinNotificationURL,
 		"dev_eui": pl.DevEUI,
 	}).Info("handler/http: publishing join notification")
-	return h.send(h.config.JoinNotificationURL, pl)
+	h.sendAsync(h.config.JoinNotificationURL, pl)
+	return nil
 }
 
 // SendACKNotification sends an ACK notification.
@@ -119,7 +129,8 @@ func (h *Handler) SendACKNotification(pl handler.ACKNotification) error {
 		"url":     h.config.ACKNotificationURL,
 		"dev_eui": pl.DevEUI,
 	}).Info("handler/http: publishing ack notification")
-	return h.send(h.config.ACKNotificationURL, pl)
+	h.sendAsync(h.config.ACKNotificationURL, pl)
+	return nil
 }
 
 // SendErrorNotification sends an error notification.
@@ -132,5 +143,6 @@ func (h *Handler) SendErrorNotification(pl handler.ErrorNotification) error {
 		"url":     h.config.ErrorNotificationURL,
 		"dev_eui": pl.DevEUI,
 	}).Info("handler/http: publishing error notification")
-	return h.send(h.config.ErrorNotificationURL, pl)
+	h.sendAsync(h.config.ErrorNotificationURL, pl)
+	return nil
 }
