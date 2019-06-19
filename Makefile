@@ -61,6 +61,7 @@ static/swagger/api.swagger.json:
 
 requirements:
 	@echo "Installing development tools"
+	go mod download
 	@go get -u github.com/golang/lint/golint
 	@go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway
 	@go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger
