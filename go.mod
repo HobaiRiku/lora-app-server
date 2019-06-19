@@ -9,7 +9,6 @@ require (
 	github.com/eclipse/paho.mqtt.golang v1.2.0
 	github.com/elazarl/go-bindata-assetfs v1.0.0
 	github.com/garyburd/redigo v1.6.0
-	github.com/gobuffalo/packr v1.25.0 // indirect
 	github.com/golang/protobuf v1.3.1
 	github.com/gorilla/mux v1.7.2
 	github.com/grpc-ecosystem/go-grpc-middleware v1.0.0
@@ -26,14 +25,14 @@ require (
 	github.com/spf13/cobra v0.0.4
 	github.com/spf13/viper v1.4.0
 	github.com/tmc/grpc-websocket-proxy v0.0.0-20190109142713-0ad062ec5ee5
-	github.com/ziutek/mymysql v1.5.4 // indirect
-	golang.org/x/crypto v0.0.0-20190605123033-f99c8df09eb5
+	golang.org/x/crypto v0.0.0-20190325154230-a5d413f7728c
 	golang.org/x/net v0.0.0-20190603091049-60506f45cf65
 	google.golang.org/appengine v1.4.0 // indirect
-	google.golang.org/genproto v0.0.0-20190605220351-eb0b1bdb6ae6
+	google.golang.org/genproto v0.0.0-20180817151627-c66870c02cf8
 	google.golang.org/grpc v1.21.1
-	gopkg.in/gorp.v1 v1.7.2 // indirect
 	gopkg.in/sourcemap.v1 v1.0.5 // indirect
 )
 
 replace github.com/brocaar/loraserver => github.com/hobairiku/loraserver v1.0.1-riv-custom
+
+replace github.com/brocaar/lorawan => github.com/hobairiku/lorawan v1.0.1-riv-custom
