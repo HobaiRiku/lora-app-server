@@ -73,7 +73,6 @@ requirements:
 	@go get -u golang.org/x/tools/cmd/stringer
 	@go get -u github.com/golang/dep/cmd/dep
 	@go get -u github.com/goreleaser/goreleaser
-	@dep ensure -v
 
 ui-requirements:
 	@echo "Installing UI requirements"
